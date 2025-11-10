@@ -1,0 +1,22 @@
+{% load crispy_forms_field %}
+{% load widget_tweaks %}
+
+{% if field|is_checkbox %}
+    <div class="form-check">
+        <label class="form-check-label">
+            {{ field|safe }} {{ field.label_tag }}
+        </label>
+    </div>
+{% else %}
+    <div class="mb-3">
+        {{ field.label_tag }} {{ field|add_class("form-control") }}
+        {% if field.help_text %}
+            <small class="text-muted">{{ field.help_text|safe }}</small>
+        {% endif %}
+        {% if field.errors %}
+            <div class="invalid-feedback">
+                {{ field.errors|striptags|safe }}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
